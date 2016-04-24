@@ -1,0 +1,140 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="favicon.ico" rel="icon">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/highlight.default.min.css" rel="stylesheet">
+  <link href="css/fileinput.css" media="all" rel="stylesheet"/>
+  <link href="wd.css" rel="stylesheet">
+  <title>Wikidown</title>
+</head>
+<body onload="init()">
+  <div id="fb-root"></div>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+				<span id="titleHead" class="titleLink"></span>  
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right hide" id="menuLogin">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">Login</a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a onclick="login()">Login</a></li>
+              <li><a onclick="logout()">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-share"></span>
+            <ul class="dropdown-menu" role="menu">
+              <li><a onclick="facebookShare()">Facebook</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-right">
+          <input id="staticUrl" type="text" placeholder="URL" class="form-control">
+        </form>
+        <form class="navbar-form navbar-right hide" id="menuEdit">
+          <div class="form-group">
+            <input id="filepath" type="hidden" class="form-control" placeholder="filepath" aria-describedby="basic-addon1">
+            <button class="btn btn-success" type="button" onclick="show()">Show</button>
+            <button class="btn btn-success" type="button" onclick="edit()">Edit</button>
+            <button class="btn btn-success" type="button" onclick="save()">Save</button>
+            <button class="btn btn-success" type="button" onclick="upload()">Upload</button>
+          </div>
+        </form>     
+      </div>
+    </div>
+  </nav>
+  
+  <div id="panelShow" class="tab-pane panel container-fluid"> <!-- Show -->
+    <div class="row">
+      <div id="sidebar"  class="col-sm-3 col-md-2 sidebar">
+        <ul id="side" class="nav nav-sidebar"></ul>
+      </div>  
+      <div id="htmlBox" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="overflow-y:scroll;height:90%;padding:10px;">
+      {%=wdHtml%}
+      </div>    
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="overflow-y:scroll;height:90%;padding:10px;">
+  <!-- disqus -->
+<!--	
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//cccnquedutw.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+-->
+<!-- /disqus -->
+      </div>
+    </div>
+  </div>
+  <div id="panelEdit" class="tab-pane panel container-fluid"> <!-- 編輯 -->
+    <br/>
+    <textarea id="wdBox" class="form-control" style="width:100%; height:80%">
+    {%=wd%}
+    </textarea>
+  </div>
+  <div id="panelUpload" class="tab-pane panel container-fluid" style="height:75%">
+    <center>
+    <div class="kv-main">
+      <form enctype="multipart/form-data">
+        <div class="form-group">
+      <input id="imageUpload" name="imageUpload" type="file" multiple=true class="file-loading">
+        </div>
+      </form>
+    </div>
+    </center>
+  </div>
+  <div id="panelLogin" class="tab-pane panel container-fluid"> <!-- 登入 -->
+    <form class="form-signin" role="form">
+      <input type="text" id="loginUser" class="form-control" required autofocus data-mt="User" placeholder="Account"/>
+      <input type="password" id="loginPassword" class="form-control" required data-mt="Password" placeholder="Password"/>
+      <button class="btn btn-lg btn-primary btn-block" type="button" data-mt="Login" onclick="Server.login()">Login</button>
+    </form>
+  </div>
+  
+  
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/showdown.js"></script>
+<!--  
+  <script src="js/Showdown/extensions/table.min.js"></script>
+  <script src="js/Showdown/extensions/mathjax.js"></script>
+-->
+  <script src="js/highlight.min.js"></script>
+  <script src="js/fileinput.js"></script>
+  <script src="config.js"></script>
+  <script src="wdlib.js"></script>
+  <script src="wdspa.js"></script>
+<!--	
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+-->
+</body>
+</html>
+
