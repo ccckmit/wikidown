@@ -89,6 +89,7 @@ app.use(route.post('/file/:domain/:file', function*(domain, file) {
     return;
   }
   console.log('post %s:%s', domain, file)
+  yield mzfs.mkdir(routeMap.file+"/").catch(function(){});
   yield mzfs.mkdir(routeMap.file+"/"+domain+"/").catch(function(){});
   yield mzfs.writeFile(routeMap.file+"/"+domain+"/"+file, text).then(function() {
     response(res, 200, 'write success!');
