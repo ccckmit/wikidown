@@ -9,13 +9,13 @@ var session = require('koa-session');
 var route   = require('koa-route');
 var parse   = require('co-busboy');
 var saveTo  = require('save-to');
-var wdlib   = require('./lib/wdlib');
-var config  = require('./lib/config');
-var setting = require('./secret');
+var wdlib   = require('./web/wdlib');
+var config  = require('./web/config');
+var setting = require('./setting');
 var passwords = setting.passwords;
 var app = koa();
 var routeMap = {
-  web:path.join(__dirname, 'lib'),
+  web:path.join(__dirname, 'web'),
   file:path.join(process.cwd(), 'file'),
 };
 // var sysFileRoot=fileDirs[0];
