@@ -1,6 +1,6 @@
 {
   "name": "wikidown",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Wikidown = Wiki + Markdown",
   "main": "wikidown",
   "dependencies": {
