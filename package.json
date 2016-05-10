@@ -4,14 +4,7 @@
   "description": "Wikidown = Wiki + Markdown",
   "main": "wikidown",
   "dependencies": {
-    "co-busboy": "^1.3.1",
-    "koa": "^1.2.0",
-    "koa-bodyparser": "^2.0.1",
-    "koa-route": "^2.4.2",
-    "koa-session": "^3.3.1",
-    "mz": "^2.4.0",
-    "save-to": "^1.0.3",
-    "showdown": "^1.3.0"
+    "fdbserver": "^1.6.4"
   },
   "devDependencies": {},
   "bin": {
