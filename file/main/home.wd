@@ -2,5 +2,5 @@
 
 | Topic | Content |
 |-------|---------|
-| [Wikidown](https://github.com/ccckmit/wikidown) | [[Install]](wd/README) |
-| [[Syntax]] | [[Table Extension]]  |
+| [Wikidown](https://github.com/ccckmit/wikidown) | [[Install]](wd:README) |
+| [[Syntax]](wd:syntax) | [[Table Extension]](wd:table)  |
