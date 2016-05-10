@@ -46,7 +46,7 @@ function wd2html(wd, domain, options) {
   wd  = wd.replace(/(\s)\[\[([^\]]+?)\]\]\(([^:\)]+):([^:\)]+)\)/gi, '$1<a href="/wd.html#$3/$4.wd" class="innerLink">$2</a>'); // [[text]](domain:file)
   wd  = wd.replace(/(\s)\[\[([^\]]+?)\]\]\((.*?)\)/gi, '$1<a href="/wd.html#'+domain+'/$3.wd" class="innerLink">$2</a>'); // [[text]](file)
   wd  = wd.replace(/(\s)\[\[([^\]:]+):([^\]:]+)\]\]/gi, '$1<a onclick="return go(\'$2\',\'$3\')" href="/wd.html#$2/$3.wd" class="innerLink">$2/$3</a>'); // [[domain:file]]
-  wd  = wd.replace(/(\s)\[\[([^\]:]+?)\]\]/gi, '$1<a onclick="return go(\''+domain+'\',\'$3\')" href="/wd.html#'+domain+'/$2.wd" class="innerLink">$2</a>'); // [[file]]
+  wd  = wd.replace(/(\s)\[\[([^\]:]+?)\]\]/gi, '$1<a onclick="return go(\''+domain+'\',\'$2\')" href="/wd.html#'+domain+'/$2.wd" class="innerLink">$2</a>'); // [[file]]
   if (typeof options!=='undefined' && options.isHash===false) {
     wd = wd.replace(/href="#(\w+):(\w+)"/gi, 'href="view\/$1\/$2\.html""');
   }
