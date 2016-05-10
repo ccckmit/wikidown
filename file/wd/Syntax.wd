@@ -1,0 +1,13 @@
+# Wikidown Syntax
+
+A Wikidown document is a Markdown document with the following syntax extension.
+
+* use `[[...]](domain:file)` for inner link.
+* use `![[...]](domain:file)` for inner image.
+* use `@[[...]](domain:file)` for inner file.
+* use the [showdown table extension](https://github.com/showdownjs/table-extension) syntax
+
+You may learn markdown syntax form the following document.
+
+* 中文 : <http://markdown.tw/>
+* English : <https://daringfireball.net/projects/markdown/>

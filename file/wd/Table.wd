@@ -1,0 +1,20 @@
+# Table Extension
+
+The table extension syntax
+
+```
+| field1 | field2 | field3 |
+|--------|--------|--------|
+| cell11 | cell12 | cell13 |
+| cell21 | cell22 | cell23 |
+| cell31 | cell32 | cell33 |
+```
+
+will show as
+
+| field1 | field2 | field3 |
+|--------|--------|--------|
+| cell11 | cell12 | cell13 |
+| cell21 | cell22 | cell23 |
+| cell31 | cell32 | cell33 |
+
