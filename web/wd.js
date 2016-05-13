@@ -9,15 +9,15 @@ E.loadScript=function(url, callback) {
 }
 
 $( document ).ready(function() {
-	console.log("document.ready: E.init2");
   E.init2();
 });
 
-var domain;
+var domain, file;
 var EloadFile = E.loadFile;
 E.loadFile=function(path) {
-	domain = path.split('/')[0];
-	console.log("domain=", domain);
+	domain = path.split(/[\/\.]/)[0];
+	file = path.split(/[\/\.]/)[1];
+//	console.log("path=", path, " domain=", domain, " file=", file);
   E.showTitleHead(domain);
   E.showSide(domain);	
 	EloadFile(path);
@@ -25,25 +25,9 @@ E.loadFile=function(path) {
 
 var Einit=E.init;
 E.init2 = E.init=function() {
-//	E.loadScript('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG');
 //	E.loadScript('js/highlight.min.js');
 //	E.loadScript('js/showdown.js');
 //	E.loadScript('wdlib.js');
-/*
-	if (typeof MathJax !== 'undefined') {
-		MathJax.Hub.Config({
-				extensions: ["tex2jax.js"],
-				jax: ["input/TeX", "output/HTML-CSS"],
-				displayAlign: "left",
-				tex2jax: {
-					inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-					displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-					processEscapes: true
-				},
-				"HTML-CSS": { availableFonts: ["TeX"], scale: 130 }
-			});		
-	}	
-*/	
 //  E.loadScript('config.js', Einit);
 	Einit();
 }
@@ -55,10 +39,34 @@ E.templateApply=function(wd) {
   return templateNow.split('<%=wd%>').join(wd); // cannot use replace(reg, str), because of ＄...$ symbol，so we use split + join
 }
 
+E.httpRef=function() {
+  return window.location.href.replace('https:', 'http:').replace("wd.html#", "file/").replace(/\.wd$/, ".html");
+}
+
+E.facebookShare=function() {
+  window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(E.httpRef())+'&t='+document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
+}
+
 Eshow = E.show;
 E.show=function() {
-	console.log("E.show()");
   var wd = $('#editBox').val().trim();
+  if (typeof MathJax === 'undefined' && wd.indexOf("$")>=0) {
+		console.log("Load MathJax")
+		E.loadScript('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG', function() {
+			MathJax.Hub.Config({
+					extensions: ["tex2jax.js"],
+					jax: ["input/TeX", "output/HTML-CSS"],
+					displayAlign: "left",
+					tex2jax: {
+						inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+						displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+						processEscapes: true
+					},
+					"HTML-CSS": { availableFonts: ["TeX"], scale: 130 }
+				});					
+			}
+		);
+	}
   wd  = E.templateApply(wd);
   var html = wdlib.wd2html(wd, domain, {isHash:true});
   $('#htmlBox').html(html);
@@ -70,7 +78,10 @@ E.show=function() {
   if (typeof(MathJax) !== 'undefined') {
     MathJax.Hub.Queue(["Typeset",MathJax.Hub, "htmlBox"]);
   }
+	$("#staticUrl").val(E.httpRef());
   E.showTitle();
+//  history.replaceState({domain:domain, file:file}, document.title, '/file/'+domain+'/'+file+".html");
+	
 }
 
 E.showTitleHead=function(domain) {
@@ -113,6 +124,7 @@ E.showSide=function(domain) {
 E.go = go = function(pDomain, pFile) {
   if (history.pushState){
     history.pushState({domain:pDomain, file:pFile}, document.title, 'wd.html#'+pDomain+'/'+pFile+".wd");
+//    history.pushState({domain:pDomain, file:pFile}, document.title, '/file/'+pDomain+'/'+pFile+".html");
   }
   E.loadFile(pDomain+"/"+pFile+".wd");
   return false;

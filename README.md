@@ -6,6 +6,8 @@ Wikidown is a Wiki System for Markdown.
 
 ## Install
 
+You should install 《node.js+git》 first.
+
 ```
 $ git clone https://github.com/ccckmit/wikidown.git
 ```
@@ -28,7 +30,7 @@ Visiting http://localhost (HTTP mode) for View, and https://locahost (SSL mode) 
 
 You may edit it in SSL mode, but only view in HTTP mode. 
 
-You should login first before edit any page. The default account is 'root', default password is 'root', too !
+You should login first before edit any page. The default account is 'root', default password is '123' !
 
 ## Host
 

@@ -1,0 +1,7 @@
+# Math
+
+Wikidown use [MathJax](https://www.mathjax.org/) to show latex math expression.
+
+For example, the expression `$$\int_{0}^{\infty} f(x) dx$$` will show as : 
+
+$$\int_{0}^{\infty} f(x) dx$$

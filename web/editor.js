@@ -126,14 +126,6 @@ E.upload=function() {
   });
 }
 
-E.httpRef=function() {
-  return window.location.href.replace('https:', 'http:');
-}
-
-E.facebookShare=function() {
-  window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(E.httpRef())+'&t='+document.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
-}
-
 E.show=function() {
 	var editText = $('#editBox').val();
 	var content;
@@ -145,7 +137,7 @@ E.show=function() {
 	var html = E.render(content);
 	// http://stackoverflow.com/questions/12449890/reload-content-in-modal-twitter-bootstrap
 	$('#htmlBox').html(html);
-	$("#htmlBox").animate({ scrollTop: 0 }, "fast");		
+	$("#htmlBox").animate({ scrollTop: 0 }, "fast");
   E.switchPanel('panelShow');
 }
 

@@ -1,6 +1,7 @@
 var config = (function() {
   var title={
     'default':' [[Wikidown]](wd:home) ',
+		wd:' [[Wikidown]](wd:home) ', 
 		main:' [[Main]](main:home) ', 
   };
 
@@ -8,7 +9,7 @@ var config = (function() {
   <center style="font-size:small;color:#888888">(C) Copy Right';
 
   var templateCC='<%=wd%>\n\n----\n\n\
-  <center style="font-size:small;color:#888888"><img src="img/by-sa.png"</center>';
+  <center style="font-size:small;color:#888888"><img src="web/img/by-sa.png" width="100"/></center>';
 
   var template={
     'default':templateCC,
