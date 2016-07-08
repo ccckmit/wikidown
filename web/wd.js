@@ -109,9 +109,9 @@ E.showSide=function(domain) {
   for (var i in items) {
     var parts = items[i].split("#");
     if (parts.length > 2 && parts[2]==="active")
-      sideHtml += '<li class="active"><a href="#'+domain+':'+parts[1]+'">'+parts[0]+'</a></li>\n';    
+      sideHtml += '<li class="active"><a href="#'+domain+'/'+parts[1]+'.wd">'+parts[0]+'</a></li>\n';    
     else
-      sideHtml += '<li><a href="#'+domain+':'+parts[1]+'">'+parts[0]+'</a></li>\n';    
+      sideHtml += '<li><a href="#'+domain+'/'+parts[1]+'.wd">'+parts[0]+'</a></li>\n';    
   }
   if (side.length === 0) {
     $('#side').html('');

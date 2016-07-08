@@ -19,7 +19,10 @@ function wd2md(wd, domain) {
 }
 
 function md2html(md) {
-  return converter.makeHtml(md);
+  md = md.replace(/(\s)(\$.*?\$)(\s)/gi, '$1<code>$2</code>$3');
+  var html = converter.makeHtml(md);
+  html = html.replace(/<code>(\$.*?\$)<\/code>/gi, '$1');
+  return html;
 }
 
 function wd2html(wd, domain, options) {

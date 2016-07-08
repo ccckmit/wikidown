@@ -5,7 +5,7 @@ var mzfs = require('mz/fs');
 var wdlib = require('./web/wdlib');
 var config = require('./web/config');
 
-console.log("config.title=", config.title);
+// console.log("config.title=", config.title);
 
 var staticHtml = mzfs.readFileSync(__dirname+'/web/static.html', 'utf-8');
 
