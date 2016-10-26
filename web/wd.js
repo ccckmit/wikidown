@@ -50,31 +50,35 @@ E.facebookShare=function() {
 Eshow = E.show;
 E.show=function() {
   var wd = $('#editBox').val().trim();
-  if (typeof MathJax === 'undefined' && wd.indexOf("$")>=0) {
-		console.log("Load MathJax")
-		E.loadScript('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG', function() {
-			MathJax.Hub.Config({
-					extensions: ["tex2jax.js"],
-					jax: ["input/TeX", "output/HTML-CSS"],
-					displayAlign: "left",
-					tex2jax: {
-						inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-						displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-						processEscapes: true
-					},
-					"HTML-CSS": { availableFonts: ["TeX"], scale: 130 }
-				});					
-			}
-		);
-	}
   wd  = E.templateApply(wd);
+  wd  = wd.replace(/(\s)($.*$)(\s)/gi, '$1<pre>$2</pre>$3');
   var html = wdlib.wd2html(wd, domain, {isHash:true});
+  html  = html.replace(/(\s)(<pre>($.*$)<\/pre>$)(\s)/gi, '$1$2$3');
   $('#htmlBox').html(html);
-  $("#htmlBox").animate({ scrollTop: 0 }, "fast");
+	if (window.location.protocol === "http:")
+		$("#htmlBox").animate({ scrollTop: 0 }, "fast");
   $('pre code').each(function(i, block) {
     hljs.highlightBlock(block);
   });
   E.switchPanel('panelShow');
+  if (typeof MathJax === 'undefined' && wd.indexOf("$")>=0) {
+    console.log("Load MathJax")
+    E.loadScript('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG', function() {
+      MathJax.Hub.Config({
+          extensions: ["tex2jax.js"],
+          jax: ["input/TeX", "output/HTML-CSS"],
+          displayAlign: "left",
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true
+          },
+          "HTML-CSS": { availableFonts: ["TeX"], scale: 130 }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub, "htmlBox"]);          
+      }
+    );
+  }
   if (typeof(MathJax) !== 'undefined') {
     MathJax.Hub.Queue(["Typeset",MathJax.Hub, "htmlBox"]);
   }
@@ -109,9 +113,9 @@ E.showSide=function(domain) {
   for (var i in items) {
     var parts = items[i].split("#");
     if (parts.length > 2 && parts[2]==="active")
-      sideHtml += '<li class="active"><a href="#'+domain+':'+parts[1]+'">'+parts[0]+'</a></li>\n';    
+      sideHtml += '<li class="active"><a href="#'+domain+'/'+parts[1]+'.wd">'+parts[0]+'</a></li>\n';    
     else
-      sideHtml += '<li><a href="#'+domain+':'+parts[1]+'">'+parts[0]+'</a></li>\n';    
+      sideHtml += '<li><a href="#'+domain+'/'+parts[1]+'.wd">'+parts[0]+'</a></li>\n';    
   }
   if (side.length === 0) {
     $('#side').html('');
